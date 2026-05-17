@@ -1,0 +1,19 @@
+<h1>タスク詳細</h1>
+
+<p>ID: <span th:text="${task.id}"></span></p>
+<p>タイトル: <span th:text="${task.title}"></span></p>
+<p>説明: <span th:text="${task.description}"></span></p>
+
+<!-- 更新 -->
+<a th:href="@{/tasks/{id}/edit(id=${task.id})}">
+	更新
+</a>
+
+<!-- 削除 -->
+<form th:action="@{/tasks/{id}/delete(id=${task.id})}" 
+	   method="post"
+	   onsubmit="return confirm('削除しますか？');">
+	
+	<button type="submit">削除</button>
+
+</form>

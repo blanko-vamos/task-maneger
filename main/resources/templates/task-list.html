@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<!-- 処理機能画面表示段階では一旦完成 -->
+<title>タスク一覧</title>
+</head>
+<body>
+	<h1>タスク一覧</h1>
+	<a  th:href="@{/tasks/new}">
+		+ 新規タスク追加
+	</a>
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<th>タイトル</th>
+		</tr>
+		<!-- tasksの中身を一つずつ取り出す　javaでいう拡張for文 -->
+		<tr th:each="task : ${tasks}">
+		<td th:text="${task.id}"></td>
+		<td> <!-- /tasks/idのURLを作る -->
+			<a th:href="@{/tasks/{id}(id=${task.id})}"
+			   th:text="${task.title}"></a><!-- taskのタイトルを表示する -->	
+		</td>
+		</tr>
+	</table>
+</body>
+</html>

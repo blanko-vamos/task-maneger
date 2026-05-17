@@ -1,0 +1,15 @@
+<form th:action="@{/tasks}" th:object= "${task}" method="post">
+
+<label>タイトル</label>
+<input type="text" th:field="*{title}" required>
+
+<br>
+
+<label>説明</label>
+<textarea th:field="*{description}"></textarea>
+
+<br>
+
+<button type="submit">登録</button>
+
+</form>
