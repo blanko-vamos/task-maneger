@@ -1,0 +1,21 @@
+<h1>タスク更新</h1>
+
+<form th:action="@{/tasks/{id}/update(id=${task.id})}"
+	th:object="${task}" 
+	method="post">
+	
+	<p>ID: <span th:text="*{id}"></span></p>
+	
+	<label>タイトル</label>
+	<input type="text" th:field="*{title}" required>
+	
+	<br>
+	
+	<label>説明</label>
+	<textarea th:field="*{description}"></textarea>
+	
+	<br>
+	
+	<button type="submit">更新</button>
+
+</form>
