@@ -3,6 +3,7 @@
 <p>ID: <span th:text="${task.id}"></span></p>
 <p>タイトル: <span th:text="${task.title}"></span></p>
 <p>説明: <span th:text="${task.description}"></span></p>
+<p>状況: <span th:text="${task.status.label}"></span></p>
 
 <!-- 更新 -->
 <a th:href="@{/tasks/{id}/edit(id=${task.id})}">

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.taskmanager.service.TaskService;
 import com.example.taskmanager.task.Task;
+import com.example.taskmanager.taskstatus.TaskStatus;
 
 @Controller
 @RequestMapping("/tasks")
@@ -57,7 +58,7 @@ public class TaskController{
 			return "task-form"; //簡易バリデーション
 		}
 		
-		service.create(task.getTitle(),task.getDescription());
+		service.create(task.getTitle(),task.getDescription(),task.getStatus());
 		
 		return "redirect:/tasks";
 	}
@@ -73,13 +74,23 @@ public class TaskController{
 		
 	}
 	
+	//更新内容登録機能
+	@GetMapping("/{id}/edit")
+	public String showEditForm(@PathVariable Long id,
+								Model model) {
+		Task task = service.findById(id);
+		model.addAttribute("task", task);
+		return "task-edit";
+	}
+	
 	//更新処理
 		@PostMapping("/{id}/update")
 		//受け取ったURLに対象のidとタイトルが含まれていればそれを取得しupdateメソッドにわたして更新
 		public String update(@PathVariable Long id,
 							@RequestParam String title,
-							@RequestParam String description){
-			service.update(id, title,description);
+							@RequestParam String description,
+							@RequestParam TaskStatus status){
+			service.update(id, title,description,status);
 			//tasksページに戻る
 			return "redirect:/tasks";
 		}

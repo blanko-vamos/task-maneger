@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.taskmanager.repository.TaskRepository;
 import com.example.taskmanager.task.Task;
+import com.example.taskmanager.taskstatus.TaskStatus;
 
 @Service
 public class TaskService{
@@ -19,12 +20,14 @@ public class TaskService{
 		}
 		
 	//タスクを新規追加するメソッド
-	public Task create(String title,String description) {
+	public Task create(String title,String description,TaskStatus status) {
 		Task task = new Task();
 		//タスクのタイトルを渡す
 		task.setTitle(title);
 		//タスクの内容を渡す
 		task.setDescription(description);
+		//タスクの状況を保存
+		task.setStatus(status);
 		//更新内容を保存
 		return repository.save(task);
 	}
@@ -41,13 +44,15 @@ public class TaskService{
 		return repository.findAll();
 	}
 	//タスクのタイトルを更新するメソッド
-	public void update(Long id,String title,String description) {
+	public void update(Long id,String title,String description,TaskStatus status) {
 		//対象のタスクがあるのかを先ず確認
 		Task task = repository.findById(id)
 				.orElseThrow(() -> new RuntimeException("タスクが存在しません"));
 		
 		//新しいタスク名を渡す
 		task.setTitle(title);
+		task.setDescription(description);
+		task.setStatus(status);
 		//IDを自動採番　そのIDをtaskオブジェクトにセット
 		repository.save(task);
 	}

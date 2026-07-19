@@ -16,6 +16,15 @@
 	
 	<br>
 	
+	<label>状況</label>
+	<select th:field = "*{status}">
+		<option value = "TODO">作業前</option>
+		<option value = "DOING">作業中</option>
+		<option value = "DONE">完了</option>
+	</select>
+	
+	<br>
+	
 	<button type="submit">更新</button>
 
 </form>
